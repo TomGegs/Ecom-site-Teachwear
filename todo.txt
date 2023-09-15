@@ -1,0 +1,1 @@
+components - ItemSliderGallery > take a prop array of data to pass to ItemCard 
