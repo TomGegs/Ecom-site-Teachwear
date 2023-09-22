@@ -27,24 +27,22 @@ const NewRelease = () => {
                     productLink="/"
                     key={1}
                 />
-                <span className="hidden flex-row gap-10 md:flex">
-                    <ProductCard
-                        image1={BannerImg1}
-                        image2={BannerImg2}
-                        itemName="Item NAME here"
-                        itemPrice={100.01}
-                        productLink="/"
-                        key={1}
-                    />
-                    <ProductCard
-                        image1={BannerImg1}
-                        image2={BannerImg2}
-                        itemName="Item NAME here"
-                        itemPrice={100.01}
-                        productLink="/"
-                        key={1}
-                    />
-                </span>
+                <ProductCard
+                    image1={BannerImg1}
+                    image2={BannerImg2}
+                    itemName="Item NAME here"
+                    itemPrice={100.01}
+                    productLink="/"
+                    key={1}
+                />
+                <ProductCard
+                    image1={BannerImg1}
+                    image2={BannerImg2}
+                    itemName="Item NAME here"
+                    itemPrice={100.01}
+                    productLink="/"
+                    key={1}
+                />
             </div>
         </section>
     );

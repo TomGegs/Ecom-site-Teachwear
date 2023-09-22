@@ -10,7 +10,7 @@ const PageLayout = ({ children }: Props) => {
     return (
         <>
             <Header />
-            <div className="mt-[60px]">{children}</div>
+            <main className="mt-[60px] h-full min-h-screen ">{children}</main>
             <FooterSiteMap />
         </>
     );

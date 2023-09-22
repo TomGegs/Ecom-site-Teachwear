@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client';
 
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
@@ -194,10 +193,5 @@ const Header = () => {
             <Navbar.Toggle />
         </Navbar>
     );
-=======
-const Header = () => {
-    return <div>Header</div>;
->>>>>>> bbe35762337c35be39c9398f0d81ea830b40fe09
 };
-
 export default Header;

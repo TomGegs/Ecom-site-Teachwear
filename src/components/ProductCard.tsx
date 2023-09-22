@@ -18,9 +18,9 @@ export function ProductCard({
     productLink,
 }: ProductCardProps) {
     return (
-        <div>
+        <div className="h-full w-full py-6">
             <a href={productLink} className="group" key={key}>
-                <div className="relative h-[200px] w-full rounded-xl bg-gray-500 md:h-[500px]">
+                <div className="relative h-full w-full rounded-xl bg-gray-500">
                     <img
                         src={image1}
                         alt=""
@@ -29,7 +29,7 @@ export function ProductCard({
                     <img
                         src={image2}
                         alt=""
-                        className="absolute left-0 right-0 top-0 h-full rounded-xl bg-transparent object-cover object-center opacity-0 transition duration-500 ease-in-out group-hover:opacity-100"
+                        className="absolute left-0 top-0 h-full rounded-xl bg-transparent object-cover object-center opacity-0 transition duration-500 ease-in-out group-hover:opacity-100"
                     />
                 </div>
             </a>

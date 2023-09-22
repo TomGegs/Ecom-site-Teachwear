@@ -12,7 +12,10 @@ export function ProductPage() {
 
     return (
         <PageLayout>
-            <main id="products" className="flex h-full w-full flex-row">
+            <section
+                id="products"
+                className="relative flex h-full w-full flex-row"
+            >
                 {/* Sidebar */}
                 <aside>
                     <Sidebar
@@ -20,7 +23,8 @@ export function ProductPage() {
                         toggleSidebar={toggleSidebar}
                     />
                 </aside>
-                <section className="h-full flex-col">
+                {/* Main Content */}
+                <section className="relative h-full w-full flex-col">
                     {/* Banner Image Container */}
                     <div className="relative mx-auto h-[400px] w-full">
                         <img
@@ -37,7 +41,7 @@ export function ProductPage() {
                         </div>
                     </div>
                     {/* Product Grid */}
-                    <div className="relative flex h-full w-full flex-col">
+                    <div className="relative flex w-full flex-col">
                         <button
                             className="bg-primary-700 hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-2 mr-2 rounded-lg px-5 py-2.5 text-sm font-black text-black focus:outline-none focus:ring-4"
                             type="button"
@@ -50,7 +54,14 @@ export function ProductPage() {
                         <ProductCollection />
                     </div>
                 </section>
-            </main>
+                <div
+                    className={`absolute top-0 w-full bg-black transition-all delay-100 duration-300 ease-in-out ${
+                        isSidebarOpen
+                            ? `h-full min-h-screen opacity-50`
+                            : `h-0 opacity-0`
+                    }`}
+                />
+            </section>
         </PageLayout>
     );
 }
