@@ -1,5 +1,5 @@
 // import useFetch from '../../hooks/useFetch';
-import { ProductCard } from '../../ProductCard';
+import { ProductCard } from '../../../components/ProductCard';
 import BannerImg1 from '../../../assets/images/BannerImg1.png';
 import BannerImg2 from '../../../assets/images/BannerImg2.png';
 
@@ -31,7 +31,7 @@ export function ProductCollection() {
     // );
 
     return (
-        <div className="m-4 grid grid-cols-5 gap-6">
+        <div className="m-4 grid grid-cols-2 gap-6 md:grid-cols-4">
             {/* {error
                 ? 'Something went wrong!'
                 : loading
@@ -50,8 +50,8 @@ export function ProductCollection() {
                 image1={BannerImg1}
                 image2={BannerImg2}
                 itemName="Item NAME here"
-                itemPrice={100.01}
-                productLink="/"
+                itemPrice={100.09}
+                productLink="individualProduct"
                 key={1}
             />
             <ProductCard

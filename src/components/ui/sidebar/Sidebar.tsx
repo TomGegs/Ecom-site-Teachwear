@@ -8,7 +8,7 @@ export function Sidebar({ isSidebarOpen, toggleSidebar }: SidebarProps) {
         <>
             {/* {isSidebarOpen && ( */}
             <section
-                className={`absolute z-10 flex h-full w-[1/2] flex-col bg-red-400 transition-all duration-500 ease-in-out md:w-[400px] ${
+                className={`absolute z-10 flex h-full w-[70%] flex-col bg-red-400 transition-all duration-500 ease-in-out md:w-[50%] ${
                     isSidebarOpen
                         ? 'left-0 translate-x-0'
                         : '-left-full -translate-x-[100%]'

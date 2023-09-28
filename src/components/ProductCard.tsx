@@ -1,5 +1,7 @@
 'use client';
 
+import { Link } from 'react-router-dom';
+
 type ProductCardProps = {
     image1: string;
     image2: string;
@@ -19,7 +21,12 @@ export function ProductCard({
 }: ProductCardProps) {
     return (
         <div className="h-full w-full py-6">
-            <a href={productLink} className="group" key={key}>
+            <Link
+                to={`/products/${productLink}`}
+                className="group"
+                key={key}
+                preventScrollReset={true}
+            >
                 <div className="relative h-full w-full rounded-xl bg-gray-500">
                     <img
                         src={image1}
@@ -32,7 +39,7 @@ export function ProductCard({
                         className="absolute left-0 top-0 h-full rounded-xl bg-transparent object-cover object-center opacity-0 transition duration-500 ease-in-out group-hover:opacity-100"
                     />
                 </div>
-            </a>
+            </Link>
             <h5 className="text-xs font-bold tracking-tight text-gray-900 dark:text-white md:text-2xl">
                 {itemName}
             </h5>

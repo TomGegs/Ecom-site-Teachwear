@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { WrappedApp } from './App.tsx';
 import './index.css';
+import { App } from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <WrappedApp />
+        {/* <Provider store={store}> */}
+        {/* <PersistGate loading={null} persistor={persistor}> */}
+        <App />
+        {/* </PersistGate> */}
+        {/* </Provider> */}
     </React.StrictMode>
 );
