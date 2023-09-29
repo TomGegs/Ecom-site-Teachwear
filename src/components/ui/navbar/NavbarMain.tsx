@@ -3,8 +3,11 @@
 import { Dropdown, Navbar } from 'flowbite-react';
 import bannerLogo from '../../../assets/images/beforeScrollNavLogo.svg';
 import { Link } from 'react-router-dom';
+import { UserAuth } from '../../../firebase/context/AuthContext';
 
 const NavbarMain = () => {
+    const { user } = UserAuth();
+
     return (
         <Navbar
             fluid
@@ -194,8 +197,10 @@ const NavbarMain = () => {
                         <span className="sr-only">Shopping cart</span>
                     </button>
                 </div>
+
+                {/* User Login */}
                 <div className="flex flex-row">
-                    <Link to="/userLogin">
+                    <Link to={user?.emailVerified ? '/account' : '/login'}>
                         <svg
                             className="h-6 w-6 text-gray-800 dark:text-white"
                             aria-hidden="true"

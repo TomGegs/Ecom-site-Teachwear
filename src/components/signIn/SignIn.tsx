@@ -1,14 +1,21 @@
 import { Button } from 'flowbite-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../firebase/context/AuthContext';
+import { useEffect, useState } from 'react';
 
-export function SignIn() {
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+export const SignIn = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const { userSignInGoogle, user } = UserAuth();
+
+    // Email - sign in
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    }
+    };
 
-    const { userSignInGoogle } = UserAuth();
-    // Google onClick Sign-in
+    // Google  Sign-in
     const handleSignInGoogle = async () => {
         try {
             await userSignInGoogle();
@@ -16,6 +23,15 @@ export function SignIn() {
             console.log(error);
         }
     };
+
+    //Navigate to dashboard if signed in
+    const navigateToAccount = useNavigate();
+
+    useEffect(() => {
+        if (user != null) {
+            navigateToAccount('/account');
+        }
+    }, [navigateToAccount, user]);
 
     return (
         <div className="relative mx-auto flex h-full max-w-[600px] flex-col justify-center gap-6 object-center pt-12 align-middle">
@@ -25,16 +41,18 @@ export function SignIn() {
             </h1>
             <form onSubmit={handleSubmit}>
                 <input
-                    type="text"
+                    type="email"
                     name="email"
                     id="email"
                     placeholder="EMAIL"
+                    onChange={(event) => setEmail(event.target.value)}
                 />
                 <input
-                    type="text"
+                    type="password"
                     name="password"
                     id="password"
                     placeholder="PASSWORD"
+                    onChange={(event) => setPassword(event.target.value)}
                 />
                 <Link to="/forgotPassword" className="underline">
                     FORGOT PASSWORD
@@ -42,21 +60,32 @@ export function SignIn() {
                 <Button size="xl" color="gray" type="button">
                     SIGN IN{' '}
                 </Button>
-                <Link to="/createAccount" className="underline">
+                <Link to="/register" className="underline">
                     CREATE ACCOUNT
                 </Link>
             </form>
-            {/* Social Signin Buttons */}
+
+            {/* Social SignIn Buttons */}
             <div className="flex text-center">
+                <p className="uppercase">OR SIGN IN WITH</p>
                 <Button
                     size="xl"
                     color="gray"
                     type="submit"
                     onClick={handleSignInGoogle}
                 >
-                    SIGN IN WITH GOOGLE
+                    GOOGLE
+                </Button>
+
+                <Button
+                    size="xl"
+                    color="gray"
+                    type="submit"
+                    onClick={handleSignInGoogle}
+                >
+                    FACEBOOK
                 </Button>
             </div>
         </div>
     );
-}
+};

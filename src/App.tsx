@@ -14,43 +14,62 @@ import NotFound from './pages/error/NotFound';
 import CreateAccount from './pages/login/CreateAccount';
 import UserLogin from './pages/login/UserLogin';
 import ForgotPassword from './pages/login/ForgotPassword';
+import UserDashboard from './pages/user/UserDashboard';
+import Protected from './pages/user/Protected';
+import { AuthContextProvider } from './firebase/context/AuthContext';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout />,
+        element: <AuthContextProvider />,
         children: [
             {
                 path: '/',
-                element: <Home />,
+                element: <MainLayout />,
                 children: [
                     {
-                        path: '/products',
-                        element: <ProductPage />,
+                        path: '/',
+                        element: <Home />,
                         children: [
                             {
-                                path: 'products/individualProduct',
-                                element: <IndividualProductPage />,
+                                path: '/products',
+                                element: <ProductPage />,
+                                children: [
+                                    {
+                                        path: 'products/individualProduct',
+                                        element: <IndividualProductPage />,
+                                    },
+                                ],
                             },
                         ],
                     },
+                    {
+                        path: '/login',
+                        element: <UserLogin />,
+                    },
+                    {
+                        path: '/register',
+                        element: <CreateAccount />,
+                    },
+                    {
+                        path: '/forgotPassword',
+                        element: <ForgotPassword />,
+                    },
+
+                    {
+                        element: <Protected />,
+                        children: [
+                            {
+                                path: '/account',
+                                element: <UserDashboard />,
+                            },
+                        ],
+                    },
+                    {
+                        path: '*',
+                        element: <NotFound />,
+                    },
                 ],
-            },
-            {
-                path: '/createAccount',
-                element: <CreateAccount />,
-            },
-            {
-                path: '/forgotPassword',
-                element: <ForgotPassword />,
-            },
-            {
-                path: '/userLogin',
-                element: <UserLogin />,
-            },
-            {
-                path: '*',
-                element: <NotFound />,
             },
         ],
     },
