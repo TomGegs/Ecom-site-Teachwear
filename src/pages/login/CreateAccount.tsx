@@ -15,15 +15,17 @@ const CreateAccount = () => {
     const navigateToAccount = useNavigate();
 
     // Email - sign in
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setError('');
         try {
             await createUserEmail(email, password);
             navigateToAccount('/account');
-        } catch (event) {
-            setError(event.message);
-            console.log(event.message);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message);
+                console.log(error.message);
+            }
         }
     };
 
@@ -36,6 +38,7 @@ const CreateAccount = () => {
         }
     };
 
+    console.log(lastName, error, firstName, email, password);
     //Navigate to dashboard if signed in
 
     useEffect(() => {

@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react';
 export const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
 
     const { userSignInGoogle, user } = UserAuth();
+    console.log(email, password);
 
     // Email - sign in
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

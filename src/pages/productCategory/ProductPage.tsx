@@ -10,7 +10,10 @@ const ProductPage = () => {
     }
 
     return (
-        <section id="products" className="relative flex h-full w-full flex-row">
+        <section
+            id="/products"
+            className="relative flex h-full w-full flex-row"
+        >
             {/* Sidebar */}
             <aside>
                 <Sidebar

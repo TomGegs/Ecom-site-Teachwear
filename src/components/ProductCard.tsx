@@ -7,7 +7,6 @@ type ProductCardProps = {
     image2: string;
     itemName: string;
     itemPrice: number;
-    key: number;
     productLink: string;
 };
 
@@ -16,7 +15,6 @@ export function ProductCard({
     image2,
     itemName,
     itemPrice,
-    key,
     productLink,
 }: ProductCardProps) {
     return (
@@ -24,7 +22,6 @@ export function ProductCard({
             <Link
                 to={`/products/${productLink}`}
                 className="group"
-                key={key}
                 preventScrollReset={true}
             >
                 <div className="relative h-full w-full rounded-xl bg-gray-500">

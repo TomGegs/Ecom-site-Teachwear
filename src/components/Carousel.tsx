@@ -58,7 +58,7 @@ const HeroCarousel = () => {
                         color="gray"
                         type="button"
                         as={Link}
-                        to="products"
+                        to="/products"
                     >
                         SHOP MENS
                     </Button>

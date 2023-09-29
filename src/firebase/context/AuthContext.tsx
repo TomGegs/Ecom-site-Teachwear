@@ -31,6 +31,7 @@ type AuthContextType = {
     userSignInGoogle: () => void;
     logOut: () => void;
     user: User | null;
+    createUserEmail: (email: string, password: string) => void;
 };
 
 // create the auth context
@@ -38,6 +39,7 @@ export const AuthContext = createContext<AuthContextType>({
     userSignInGoogle: () => {},
     logOut: () => {},
     user: null,
+    createUserEmail: () => {},
 });
 
 // component to wrap the app and provide the auth context
