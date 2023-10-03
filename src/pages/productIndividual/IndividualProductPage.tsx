@@ -3,6 +3,7 @@ import bannerImage1 from '../../assets/images/BannerImg1.png';
 import bannerImage2 from '../../assets/images/BannerImg2.png';
 import bannerImage3 from '../../assets/images/BannerImg3.png';
 import { Button, Select } from 'flowbite-react';
+import { useParams } from 'react-router-dom';
 
 const IndividualProductPage = () => {
     const [quantity, setQuantity] = useState(1);
@@ -23,10 +24,12 @@ const IndividualProductPage = () => {
         }, 300);
     }, [selectedImage]);
 
+    const { id } = useParams();
+
     return (
         <div
             className="flex h-full flex-col gap-10 px-5 md:flex-row md:py-10"
-            id="individualProduct"
+            id={id}
         >
             {/* {loading ? (
                 'loading'

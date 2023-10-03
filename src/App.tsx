@@ -1,5 +1,5 @@
 //Packages
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 //Layouts
 import { MainLayout } from './components/layouts/MainLayout';
@@ -17,60 +17,77 @@ import ForgotPassword from './pages/login/ForgotPassword';
 import UserDashboard from './pages/user/UserDashboard';
 import Protected from './pages/user/Protected';
 
-const router = createBrowserRouter([
-    {
-        element: <MainLayout />,
-        children: [
-            {
-                path: '/',
-                element: <Home />,
-                children: [
-                    {
-                        path: '/products',
-                        element: <ProductPage />,
-                        children: [
-                            {
-                                path: 'products/individualProduct',
-                                element: <IndividualProductPage />,
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                path: '/login',
-                element: <UserLogin />,
-            },
-            {
-                path: '/register',
-                element: <CreateAccount />,
-            },
-            {
-                path: '/forgotPassword',
-                element: <ForgotPassword />,
-            },
+// const router = createBrowserRouter([
+//     {
+//         element: <MainLayout />,
+//         children: [
+//             {
+//                 index: true,
+//                 path: '/',
+//                 element: <Home />,
+//                 children: [
+//                     {
+//                         path: '/products',
+//                         element: <ProductPage />,
+//                         children: [
+//                             {
+//                                 path: '/products/individualProduct',
+//                                 element: <IndividualProductPage />,
+//                             },
+//                         ],
+//                     },
+//                 ],
+//             },
+//             {
+//                 path: '/login',
+//                 element: <UserLogin />,
+//             },
+//             {
+//                 path: '/register',
+//                 element: <CreateAccount />,
+//             },
+//             {
+//                 path: '/forgotPassword',
+//                 element: <ForgotPassword />,
+//             },
 
-            {
-                element: <Protected />,
-                children: [
-                    {
-                        path: '/account',
-                        element: <UserDashboard />,
-                    },
-                ],
-            },
-            {
-                path: '*',
-                element: <NotFound />,
-            },
-        ],
-    },
-]);
+//             {
+//                 element: <Protected />,
+//                 children: [
+//                     {
+//                         path: '/account',
+//                         element: <UserDashboard />,
+//                     },
+//                 ],
+//             },
+//             {
+//                 path: '*',
+//                 element: <NotFound />,
+//             },
+//         ],
+//     },
+// ]);
 
-export function App() {
+const App = () => {
     return (
-        <>
-            <RouterProvider router={router} />
-        </>
+        <Routes>
+            <Route path="/" element={<MainLayout />}>
+                <Route path="/" index element={<Home />} />
+                <Route path="/products" element={<ProductPage />} />
+                <Route
+                    path="/products/individualProduct"
+                    element={<IndividualProductPage />}
+                />
+                <Route path="/login" element={<UserLogin />} />
+                <Route path="/register" element={<CreateAccount />} />
+                <Route path="/forgotPassword" element={<ForgotPassword />} />
+                <Route element={<Protected />}>
+                    <Route path="/account" element={<UserDashboard />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+            </Route>
+        </Routes>
     );
-}
+};
+
+export default App;
