@@ -15,7 +15,7 @@ const NavbarMain = () => {
             className="fixed left-0 top-0 z-20 w-full bg-white opacity-80 delay-75 duration-100 ease-in-out hover:border-b hover:border-gray-900 hover:bg-orange-300 dark:border-gray-600 dark:bg-gray-900 md:px-20"
         >
             <Navbar.Collapse>
-                <Navbar.Link href="products">New In</Navbar.Link>
+                <Navbar.Link href="/products">New In</Navbar.Link>
                 <Navbar.Link>
                     <Dropdown inline label={'Mens'}>
                         <Dropdown.Item className="block text-sm">

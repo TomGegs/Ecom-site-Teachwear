@@ -17,57 +17,6 @@ import ForgotPassword from './pages/login/ForgotPassword';
 import UserDashboard from './pages/user/UserDashboard';
 import Protected from './pages/user/Protected';
 
-// const router = createBrowserRouter([
-//     {
-//         element: <MainLayout />,
-//         children: [
-//             {
-//                 index: true,
-//                 path: '/',
-//                 element: <Home />,
-//                 children: [
-//                     {
-//                         path: '/products',
-//                         element: <ProductPage />,
-//                         children: [
-//                             {
-//                                 path: '/products/individualProduct',
-//                                 element: <IndividualProductPage />,
-//                             },
-//                         ],
-//                     },
-//                 ],
-//             },
-//             {
-//                 path: '/login',
-//                 element: <UserLogin />,
-//             },
-//             {
-//                 path: '/register',
-//                 element: <CreateAccount />,
-//             },
-//             {
-//                 path: '/forgotPassword',
-//                 element: <ForgotPassword />,
-//             },
-
-//             {
-//                 element: <Protected />,
-//                 children: [
-//                     {
-//                         path: '/account',
-//                         element: <UserDashboard />,
-//                     },
-//                 ],
-//             },
-//             {
-//                 path: '*',
-//                 element: <NotFound />,
-//             },
-//         ],
-//     },
-// ]);
-
 const App = () => {
     return (
         <Routes>

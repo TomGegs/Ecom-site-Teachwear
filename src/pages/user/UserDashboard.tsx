@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 
 const UserDashboard = () => {
     const { logOut, user } = UserAuth();
+
+    //sign out
     const handleSignOut = async () => {
         try {
             await logOut();
@@ -16,7 +18,7 @@ const UserDashboard = () => {
 
     const navigateToLogin = useNavigate();
 
-    //Navigate to dashboard if signed in
+    //Navigate to login if signed out
     useEffect(() => {
         if (user === null) {
             navigateToLogin('/login');

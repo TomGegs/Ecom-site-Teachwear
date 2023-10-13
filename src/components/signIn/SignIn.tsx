@@ -6,14 +6,25 @@ import { useEffect, useState } from 'react';
 export const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [error, setError] = useState('');
+    const [error, setError] = useState('');
 
-    const { userSignInGoogle, user } = UserAuth();
+    const { userSignInGoogle, userSignInEmail, user } = UserAuth();
     console.log(email, password);
+
+    const navigateToAccount = useNavigate();
 
     // Email - sign in
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setError('');
+        try {
+            await userSignInEmail(email, password);
+            navigateToAccount('/account');
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message);
+            }
+        }
     };
 
     // Google  Sign-in
@@ -26,8 +37,6 @@ export const SignIn = () => {
     };
 
     //Navigate to dashboard if signed in
-    const navigateToAccount = useNavigate();
-
     useEffect(() => {
         if (user != null) {
             navigateToAccount('/account');
@@ -40,17 +49,22 @@ export const SignIn = () => {
                 Login{' '}
                 <span className="after:absolute after:bottom-0 after:left-1/2 after:h-[5px] after:w-[100px] after:-translate-x-12 after:translate-y-3 after:bg-orange-600" />
             </h1>
+            {error ? (
+                <div className="bg-[#e4c4c4] p-4 text-center text-xl font-semibold text-[#cb2b2b]">
+                    Incorrect email or password.
+                </div>
+            ) : null}
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"
-                    name="email"
                     id="email"
+                    autoComplete="email"
                     placeholder="EMAIL"
                     onChange={(event) => setEmail(event.target.value)}
                 />
                 <input
                     type="password"
-                    name="password"
+                    autoComplete="current-password"
                     id="password"
                     placeholder="PASSWORD"
                     onChange={(event) => setPassword(event.target.value)}
@@ -58,8 +72,8 @@ export const SignIn = () => {
                 <Link to="/forgotPassword" className="underline">
                     FORGOT PASSWORD
                 </Link>
-                <Button size="xl" color="gray" type="button">
-                    SIGN IN{' '}
+                <Button size="xl" color="gray" type="submit">
+                    SIGN IN
                 </Button>
                 <Link to="/register" className="underline">
                     CREATE ACCOUNT

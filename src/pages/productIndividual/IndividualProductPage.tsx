@@ -1,14 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import bannerImage1 from '../../assets/images/BannerImg1.png';
 import bannerImage2 from '../../assets/images/BannerImg2.png';
 import bannerImage3 from '../../assets/images/BannerImg3.png';
 import { Button, Select } from 'flowbite-react';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../firebase/context/AuthContext';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 
 const IndividualProductPage = () => {
     const [quantity, setQuantity] = useState(1);
     const [selectedImage, setSelectedImage] = useState(bannerImage1);
     const [imageChange, setImageChange] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [saved, setSaved] = useState(false);
+
+    const { user } = useContext(AuthContext);
+
+    const clothingID = doc(db, 'users', `${user?.email}`);
+
+    const saveItems = async () => {
+        if (user?.email) {
+            setLiked(!liked);
+            setSaved(true);
+            await updateDoc(clothingID, {
+                savedClothing: arrayUnion({
+                    id: 101,
+                    img: 'imgHere',
+                    title: 'itemTitle',
+                    desc: 'item.description',
+                    price: '$332',
+                }),
+            });
+        } else {
+            alert('Please sign in to save items');
+        }
+    };
+
     // const { data, loading } = useFetch(`/products/${id}?populate=*`);
 
     function mainImageHandler(
@@ -24,7 +52,7 @@ const IndividualProductPage = () => {
         }, 300);
     }, [selectedImage]);
 
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
 
     return (
         <div
@@ -142,7 +170,12 @@ const IndividualProductPage = () => {
                     </Button>
                     <div className="flex uppercase ">
                         <div className="flex items-center text-lg">
-                            ADD TO WISHLIST ICON
+                            <Button color="gray" onClick={() => saveItems()}>
+                                LIKE ICON
+                            </Button>
+                            <span className="ml-2">
+                                {liked ? 'Liked' : 'Like'}
+                            </span>
                         </div>
                     </div>
                     <div className="mt-10 flex flex-col gap-2 text-gray-500">

@@ -1,11 +1,12 @@
 import { Button } from 'flowbite-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../firebase/context/AuthContext';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const CreateAccount = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [birthday, setBirthday] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -38,14 +39,8 @@ const CreateAccount = () => {
         }
     };
 
-    console.log(lastName, error, firstName, email, password);
-    //Navigate to dashboard if signed in
-
-    useEffect(() => {
-        if (user != null) {
-            navigateToAccount('/account');
-        }
-    }, [navigateToAccount, user]);
+    //Remove//
+    console.log(lastName, error, firstName, email, password, birthday);
 
     return (
         <div
@@ -89,10 +84,10 @@ const CreateAccount = () => {
                     type="date"
                     name="birthday"
                     id="birthday"
-                    onChange={(event) => setLastName(event.target.value)}
+                    onChange={(event) => setBirthday(event.target.value)}
                 />
 
-                <Button size="xl" color="gray" type="button">
+                <Button size="xl" color="gray" type="submit">
                     CREATE
                 </Button>
             </form>

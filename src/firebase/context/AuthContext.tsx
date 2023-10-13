@@ -1,8 +1,4 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics';
 import {
-    getAuth,
     signInWithPopup,
     signInWithRedirect,
     signOut,
@@ -10,15 +6,12 @@ import {
     GoogleAuthProvider,
     User,
     createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { useContext, createContext, useEffect, useState } from 'react';
-import { firebaseConfig } from '../config';
+import { doc, setDoc } from 'firebase/firestore';
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
-export const firestore = getFirestore();
-export const analytics = getAnalytics();
+import { useContext, createContext, useEffect, useState } from 'react';
+import { auth, db } from '../config';
 
 //screen display sizes
 const mobileScreen = window.screen.width <= 768;
@@ -27,19 +20,22 @@ type AuthContextProviderProps = {
     children?: React.ReactNode;
 };
 
+// auth context type
 type AuthContextType = {
     userSignInGoogle: () => void;
+    userSignInEmail: (email: string, password: string) => void;
+    createUserEmail: (email: string, password: string) => void;
     logOut: () => void;
     user: User | null;
-    createUserEmail: (email: string, password: string) => void;
 };
 
 // create the auth context
 export const AuthContext = createContext<AuthContextType>({
     userSignInGoogle: () => {},
+    userSignInEmail: () => {},
+    createUserEmail: () => {},
     logOut: () => {},
     user: null,
-    createUserEmail: () => {},
 });
 
 // component to wrap the app and provide the auth context
@@ -49,16 +45,20 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     // Email - create user account
     const createUserEmail = (email: string, password: string) => {
         createUserWithEmailAndPassword(auth, email, password);
-        // .then((userCredential) => {
-        //     // Signed in
-        //     const user = userCredential.user;
+        setDoc(doc(db, 'users', email), {
+            displayName,
+            email,
+            createdDate: timestamp,
+            ...additionalData,
+        });
+        setDoc(doc(db, 'users', email), {
+            savedClothing: [],
+        });
+    };
 
-        // })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-
-        // });
+    // Email - sign in
+    const userSignInEmail = async (email: string, password: string) => {
+        return signInWithEmailAndPassword(auth, email, password);
     };
 
     // Google - create user account and/or sign in
@@ -70,11 +70,15 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         } else {
             signInWithPopup(auth, provider);
         }
+        setDoc(doc(db, 'users', userCredential), {
+            savedClothing: [],
+        });
     };
 
     // log out
     const logOut = () => {
         signOut(auth);
+        console.log('User signed out');
     };
 
     // Listen to the Firebase Auth state and set the local state.
@@ -90,7 +94,13 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     return (
         <AuthContext.Provider
-            value={{ userSignInGoogle, createUserEmail, logOut, user }}
+            value={{
+                userSignInGoogle,
+                userSignInEmail,
+                createUserEmail,
+                logOut,
+                user,
+            }}
         >
             {children}
         </AuthContext.Provider>
