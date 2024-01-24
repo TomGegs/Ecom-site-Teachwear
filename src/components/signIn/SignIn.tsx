@@ -44,9 +44,9 @@ export const SignIn = () => {
     }, [navigateToAccount, user]);
 
     return (
-        <div className="relative mx-auto flex h-full max-w-[600px] flex-col justify-center gap-6 object-center pt-12 align-middle">
+        <div className="absolute  left-[40%] top-0 mx-auto flex h-full max-w-[600px] flex-col justify-center gap-6 object-center align-middle">
             <h1 className="relative text-center text-3xl font-bold uppercase text-orange-600">
-                Login{' '}
+                SIGN INTO YOUR ACCOUNT{' '}
                 <span className="after:absolute after:bottom-0 after:left-1/2 after:h-[5px] after:w-[100px] after:-translate-x-12 after:translate-y-3 after:bg-orange-600" />
             </h1>
             {error ? (
@@ -54,13 +54,14 @@ export const SignIn = () => {
                     Incorrect email or password.
                 </div>
             ) : null}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input
                     type="email"
                     id="email"
                     autoComplete="email"
                     placeholder="EMAIL"
                     onChange={(event) => setEmail(event.target.value)}
+                    className="rounded-lg p-4 focus:border-orange-500 focus:ring-orange-500"
                 />
                 <input
                     type="password"
@@ -68,11 +69,17 @@ export const SignIn = () => {
                     id="password"
                     placeholder="PASSWORD"
                     onChange={(event) => setPassword(event.target.value)}
+                    className="rounded-lg p-4 focus:border-orange-500 focus:ring-orange-500"
                 />
                 <Link to="/forgotPassword" className="underline">
                     FORGOT PASSWORD
                 </Link>
-                <Button size="xl" color="gray" type="submit">
+                <Button
+                    size="xl"
+                    color="gray"
+                    type="submit"
+                    className="focus:border-orange-500 focus:ring-orange-500"
+                >
                     SIGN IN
                 </Button>
                 <Link to="/register" className="underline">
@@ -81,24 +88,18 @@ export const SignIn = () => {
             </form>
 
             {/* Social SignIn Buttons */}
-            <div className="flex text-center">
-                <p className="uppercase">OR SIGN IN WITH</p>
+            <div className="flex flex-col gap-4 text-center">
+                <p className="uppercase before:mb-1  before:inline-block before:h-[2px] before:w-[50px] before:bg-gray-500 after:mb-1  after:inline-block after:h-[2px] after:w-[50px] after:bg-gray-500 ">
+                    OR CONTINUE WITH
+                </p>
                 <Button
                     size="xl"
                     color="gray"
                     type="submit"
                     onClick={handleSignInGoogle}
+                    className="focus:border-orange-500 focus:ring-orange-500"
                 >
                     GOOGLE
-                </Button>
-
-                <Button
-                    size="xl"
-                    color="gray"
-                    type="submit"
-                    onClick={handleSignInGoogle}
-                >
-                    FACEBOOK
                 </Button>
             </div>
         </div>

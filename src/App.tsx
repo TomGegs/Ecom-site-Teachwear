@@ -12,10 +12,10 @@ import NotFound from './pages/error/NotFound';
 
 //Login Pages
 import CreateAccount from './pages/login/CreateAccount';
-import UserLogin from './pages/login/UserLogin';
 import ForgotPassword from './pages/login/ForgotPassword';
 import UserDashboard from './pages/user/UserDashboard';
 import Protected from './pages/user/Protected';
+import { SignIn } from './components/signIn/SignIn';
 
 const App = () => {
     return (
@@ -27,7 +27,7 @@ const App = () => {
                     path="/products/individualProduct"
                     element={<IndividualProductPage />}
                 />
-                <Route path="/login" element={<UserLogin />} />
+                <Route path="/login" element={<SignIn />} />
                 <Route path="/register" element={<CreateAccount />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />
                 <Route element={<Protected />}>
