@@ -6,20 +6,20 @@ import { Link } from 'react-router-dom';
 import { UserAuth } from '../../../firebase/context/AuthContext';
 import { useState } from 'react';
 import Cart from '../../Cart/Cart';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 const NavbarMain = () => {
     const { user } = UserAuth();
     const [open, setOpen] = useState(false);
-    // const [close, setClose] = useState(true);
+    // // const [close, setClose] = useState(true);
 
-    const selectedProducts = useSelector((state) => state.cart.products);
+    // const selectedProducts = useSelector((state) => state.cart.products);
 
-    // Calculate the total quantity of items in the cart
-    const totalQuantity = selectedProducts.reduce(
-        (total: number, item: { quantity: number }) => total + item.quantity,
-        0
-    );
+    // // Calculate the total quantity of items in the cart
+    // const totalQuantity = selectedProducts.reduce(
+    //     (total: number, item: { quantity: number }) => total + item.quantity,
+    //     0
+    // );
 
     return (
         <Navbar
@@ -177,7 +177,7 @@ const NavbarMain = () => {
                                 ></path>{' '}
                             </g>
                         </svg>
-                        <span>{totalQuantity}</span>
+                        {/* <span>{totalQuantity}</span>  */}
                         <span className="sr-only">Shopping cart</span>
                     </button>
                     {open && <Cart />}
